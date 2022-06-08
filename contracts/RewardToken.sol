@@ -7,4 +7,8 @@ contract RewardToken is ERC20{
     constructor() ERC20("Reward Token", "RT"){
         _mint(msg.sender, 1000000* 10**18);
     }
+
+    function mint() public {
+        _mint(msg.sender, 1000000* 10**18);
+    }
 }

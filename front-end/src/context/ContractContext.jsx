@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import {stakingAddress, rewardTokenAddress, stakingAbi, rewardTokenAbi} from '../constants';
+import { useWeb3Contract } from 'react-moralis';
 
 export const ContractContext = React.createContext();
 
@@ -66,10 +67,9 @@ export const ContractProvider = function({ children }){
         // this function get the reward token balance from the current account
         const rtContract = getRewardTokenContract();
         const rtInWalletBigN = await rtContract.balanceOf(currentAccount);
-        const decimals = await rtContract.decimals();
         const formattedRtBalanceFromContract = ethers.utils.formatUnits(
             rtInWalletBigN,                                              // big number from the promise
-            decimals                                                    // decimals from the promise
+            18                                                  // decimals from the promise
         )
         setRtBalance(formattedRtBalanceFromContract)
     }
@@ -78,10 +78,9 @@ export const ContractProvider = function({ children }){
         // this function set the total staked 
         const stakeContract = getStakeContract();
         const totalStaked = await stakeContract.getStaked(currentAccount);
-        const decimals = await stakeContract.decimals();
-        const formattedStakedBalance = ethers.utils.formmatUnits(
+        const formattedStakedBalance = ethers.utils.formatUnits(
             totalStaked,
-            decimals
+            18
         )
         setStakedBalance(formattedStakedBalance);
     }
@@ -90,19 +89,32 @@ export const ContractProvider = function({ children }){
         // this function set the total earned balance
         const stakeContract = getStakeContract();
         const totalEarned = await stakeContract.earned(currentAccount);
-        const decimals = await stakeContract.decimals();
-        const formmattedEarnedBalance = ethers.utils.formmatUnits(
+        const formmattedEarnedBalance = ethers.utils.formatUnits(
             totalEarned,
-            decimals
+            18
         )
         setEarnedBalance(formmattedEarnedBalance);
     }
 
     const submitStake = async function(){
-        const amountToApprove = formData.stakingAmount;
-        console.log(amountToApprove)
-    }
+        try {
+            if(!ethereum) return alert("Please install metamask");
+            const stakeContract = getStakeContract();
+            const rtContract = getRewardTokenContract();
+            const parsedAmount = ethers.utils.parseEther(formData.stakingAmount);
+            const tx = await rtContract.approve(stakingAddress, parsedAmount).then(()=>{
+                stakeContract.stake(parsedAmount)
+            }).catch((error)=>{
+                console.log(error)
+            })
 
+            await tx.wait()
+            
+        } catch (error){
+            console.log(error)
+            throw new Error("No ethereum object.")
+        }
+    }
 
     useEffect(()=>{
         checkIfWalletIsConnected(); // auto call function once on starting
