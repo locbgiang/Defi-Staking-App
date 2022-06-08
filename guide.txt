@@ -1,0 +1,10 @@
+
+compile:
+    write smart contracts, solidity files
+    yarn hardhat compile
+deploy:
+    write deploy scripts, javascript files
+    yarn hardhat deploy
+local host:
+    yarn hardhat node
+

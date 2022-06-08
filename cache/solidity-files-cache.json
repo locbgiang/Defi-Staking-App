@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "D:\\Git\\personalprojects\\Defi-Staking-App\\contracts\\Staking.sol": {
-      "lastModificationDate": 1654455556815,
-      "contentHash": "bff47a633d402611623a4f55a64e83f0",
+      "lastModificationDate": 1654625242422,
+      "contentHash": "daf8c9ce1fe3c8fbe8effdcd87797ede",
       "sourceName": "contracts/Staking.sol",
       "solcConfig": {
         "version": "0.8.7",

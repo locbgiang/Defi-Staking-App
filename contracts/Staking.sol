@@ -129,8 +129,11 @@ contract Staking {
         
         // ok between seconds 1 and 5, person 1 got 500 tokens
         // ok at second 6 on, person 1 gets 50 tokens now
+    }
 
-        
+    function getStaked(address account) public view returns(uint256) {
+        // get amount staked in the address
+        return s_balances[account];
     }
 }
 
