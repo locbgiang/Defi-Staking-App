@@ -1,13 +1,19 @@
 import { Header } from './components/Header'
 import { StakeDetails } from './components/StakeDetails'
 import { StakeForm } from './components/StakeForm'
+import styled from "styled-components";
+
+const FullApp = styled.div`
+  height:100vh;
+  width: 100%;
+`
 function App() {
   return (
-    <div className="App">
+    <FullApp>
       <Header />
       <StakeDetails />
       <StakeForm />
-    </div>
+    </FullApp>
   )
 }
 

@@ -7,7 +7,7 @@ import { shortenAddress } from "../utils/shorttenAddress";
 
 const NavContainer = styled.div`
   background-color: #375BD2;
-  height: 150px;
+  height: 15%;
   display: flex;
 `;
 

@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "D:\\Git\\personalprojects\\Defi-Staking-App\\contracts\\Staking.sol": {
-      "lastModificationDate": 1654625242422,
-      "contentHash": "daf8c9ce1fe3c8fbe8effdcd87797ede",
+      "lastModificationDate": 1654992305792,
+      "contentHash": "1b27de7c52399becfb982822af14689e",
       "sourceName": "contracts/Staking.sol",
       "solcConfig": {
         "version": "0.8.7",
@@ -88,8 +88,8 @@
       ]
     },
     "D:\\Git\\personalprojects\\Defi-Staking-App\\contracts\\RewardToken.sol": {
-      "lastModificationDate": 1654456388563,
-      "contentHash": "c431223073f19932f1da661281a045d7",
+      "lastModificationDate": 1654727090589,
+      "contentHash": "71d9da723b6fc2fadd097cf892bac477",
       "sourceName": "contracts/RewardToken.sol",
       "solcConfig": {
         "version": "0.8.7",

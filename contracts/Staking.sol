@@ -26,10 +26,10 @@ contract Staking {
     // a mapping of how much reward user has to claim
     mapping (address => uint256) public s_rewards;
 
-    uint256 REWARD_RATE;
-    uint256 s_totalSupply;
-    uint256 s_rewardPerTokenStored;
-    uint256 s_latestUpdateTime;
+    uint256 public constant REWARD_RATE = 100;
+    uint256 private s_totalSupply;
+    uint256 public s_rewardPerTokenStored;
+    uint256 public s_latestUpdateTime;
 
     modifier updateReward (address account){
         // how much reward per token?
@@ -103,6 +103,7 @@ contract Staking {
 
     function claimReward() external updateReward(msg.sender) {
         uint256 reward = s_rewards[msg.sender];
+        s_rewards[msg.sender] = 0;
         bool success = s_rewardToken.transfer(msg.sender, reward);
         if (!success) {
             revert Staking__TransferFailed();

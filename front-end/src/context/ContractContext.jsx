@@ -29,12 +29,15 @@ export const ContractProvider = function({ children }){
     const [stakedBalance, setStakedBalance] = useState("0");
     const [earnedBalance, setEarnedBalance] = useState("0");
 
-    const [ formData, setFormData ] = useState({stakingAmount: ''})
+    const [ formData, setFormData ] = useState({stakingAmount: '', withdrawingAmount: ''})
+    
     const handleChange = (e, name) => {
         setFormData((prevState) => ({
             ...prevState, [name]: e.target.value
         }))
     }
+
+
 
     const checkIfWalletIsConnected = async function(){
         // this function automatically tells user to connect wallet
@@ -116,6 +119,48 @@ export const ContractProvider = function({ children }){
         }
     }
 
+    const mintToken = async function (){
+        try{
+            if(!ethereum) return alert("Please install metamask");
+            const rtContract = getRewardTokenContract();
+            await rtContract.mint();
+        } catch (error){
+            console.log(error)
+            throw new Error("No ethereum object.")
+        }
+    }
+
+    const withdrawToken = async function(){
+        try{
+            if(!ethereum) return alert("Please install metamask");
+            const stakeContract = getStakeContract();
+            const rtContract = getRewardTokenContract();
+            await stakeContract.withdraw(formData.withdrawingAmount);
+            const parsedAmount = ethers.utils.parseEther(formData.withdrawingAmount);
+            const tx = await rtContract.approve(stakingAddress, parsedAmount).then(()=>{
+                stakeContract.withdraw(parsedAmount)
+            }).catch((error)=>{
+                console.log(error)
+            })
+        } catch (error){
+            console.log(error)
+            throw new Error("No ethereum object")
+        }
+        
+    }
+
+    const claimReward = async function(){
+        try {
+            if(!ethereum) return alert("Please install metamask");
+            const stakeContract = getStakeContract();
+            await stakeContract.claimReward();
+            setEarnedBalance('0')
+        } catch (error){
+            console.log(error)
+            throw new Error("No ethereum object")
+        }
+    }
+
     useEffect(()=>{
         checkIfWalletIsConnected(); // auto call function once on starting
         //update the ui and get balances
@@ -124,7 +169,7 @@ export const ContractProvider = function({ children }){
             getStakedBalance();
             getEarnedBalance();
         }
-    },[currentAccount, rtBalance])
+    },[currentAccount, rtBalance, stakedBalance, earnedBalance])
 
 
     return(
@@ -136,8 +181,10 @@ export const ContractProvider = function({ children }){
             earnedBalance,
             handleChange,
             formData,
-            submitStake
-
+            submitStake,
+            mintToken,
+            withdrawToken,
+            claimReward
         }}>
             {children}
         </ContractContext.Provider>

@@ -4,7 +4,7 @@ import { ContractContext } from '../context/ContractContext';
 import styled from "styled-components";
 
 const InputArea = styled.div`
-    height: 200px;
+    height: 40%;
     width: 100%;
 
     display: flex;
@@ -18,24 +18,33 @@ const Title = styled.div`
 
 const Input = styled.input`
     width: 20%;
-    height: 10%;
 `
 
 const Button = styled.button`
-    width: 5%;
+    width: 10%;
     margin-top: 5px;
 `
 
 export function StakeForm(){
-    const { handleChange, formData, submitStake } = useContext(ContractContext);
+    const { handleChange, formData, submitStake, mintToken, withdrawToken, claimReward} = useContext(ContractContext);
     const handleSubmit = (e) =>{
         const { stakingAmount } = formData
         e.preventDefault();
         if(!stakingAmount) return;
         submitStake();
     }
+    const handleWithdrawSubmit = (e) =>{
+        const {withdrawingAmount} = formData;
+        e.preventDefault();
+        if(!withdrawingAmount) return;
+        withdrawToken();
+    }
     return(
         <InputArea>
+            <Title>
+                Mint some reward token:
+            </Title>
+            <Button onClick={mintToken}>Mint Token</Button>
             <Title>
                 Enter amount to be staked:
             </Title>
@@ -47,7 +56,28 @@ export function StakeForm(){
             <Button 
                 onClick={handleSubmit}
             >
-                Stake Now
+                Stake
+            </Button>
+            <Title>
+                Enter amount to be withdrawn:
+            </Title>
+            <Input 
+                name="withdrawingAmount"
+                onChange={(e)=>handleChange(e, "withdrawingAmount")}
+            />
+            <Button 
+                onClick={handleWithdrawSubmit}
+            >
+                Withdraw staked
+            </Button>
+            <Title>
+                Claim reward:
+            </Title>
+            
+            <Button 
+                onClick={claimReward}
+            >
+                Claim
             </Button>
         </InputArea>
     )
