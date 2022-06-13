@@ -45,7 +45,7 @@ export function Header(){
   return (
     <NavContainer>
       <ProjectName>
-        DEFI STAKING APP
+        DEFI STAKING APP (Goerli Testnet)
       </ProjectName>
       <LoginSpace>
         {!currentAccount && // if there is a metamask acc connected dont render button
