@@ -1,10 +1,11 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { ContractContext } from '../context/ContractContext';
+import { StakeForm } from "./StakeForm";
 import styled from 'styled-components'
 
 const InfoArea = styled.div`
-    height: 300px;
+    height: 600px;
     width: 100%;
 
     display: flex;
@@ -14,18 +15,65 @@ const InfoArea = styled.div`
 
 const InfoCard = styled.div`
     border: 1px solid black;
-    height: 80%;
-    width: 40%;
+    height: 100%;
+    width: 25%;
+    background-color: #1a1a1a;
 
     display: flex;
     justify-content: space-evenly;
     align-items: start;
-    padding-left: 20px;
     flex-direction: column;
+
+    border-radius: 20px;
 `
 
-const InfoItem = styled.div`
-    font-size: 20px;
+const StaticDetails = styled.div`
+    height: 40%;
+    width: 100%;
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border-bottom: 1px solid silver;
+`
+
+const Item = styled.div`
+    width: 100%;
+    height: 33%;
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
+
+const StaticDetailName = styled.div`
+    color:white;
+    width: 90%;
+    padding-left: 5px;
+`
+
+const Balances = styled.div`
+    height: 50%;
+    width: 90%;
+    background-color:silver;
+    border-radius: 10px;
+
+    display:flex;
+    justify-content: end;
+    align-items: center;
+
+    padding-right: 10px;
+
+    font-size: 40px;
+`
+
+
+const FormArea = styled.div`
+    height: 60%;
+    width: 100%;
 `
 
 export function StakeDetails(){
@@ -33,15 +81,38 @@ export function StakeDetails(){
     return(
         <InfoArea>
             <InfoCard>
-                <InfoItem>
-                    Reward token balance: {rtBalance}
-                </InfoItem>
-                <InfoItem>
-                    Staked balance: {stakedBalance}
-                </InfoItem>
-                <InfoItem>
-                    Earned balance: {earnedBalance}
-                </InfoItem>
+                <StaticDetails>
+                    <Item>
+                        <StaticDetailName>
+                            Reward token balance
+                        </StaticDetailName>
+                        <Balances>
+                            {rtBalance}
+                        </Balances>
+                    </Item>
+                    <Item>
+                        <StaticDetailName>
+                            Staked balance
+                        </StaticDetailName>
+                        <Balances>
+                            {stakedBalance}
+                        </Balances>
+                    </Item>
+                        
+                    <Item>
+                        <StaticDetailName>
+                            Earned balance
+                        </StaticDetailName>
+                        <Balances>
+                            {earnedBalance}
+                        </Balances>
+                    </Item>
+                        
+
+                </StaticDetails>
+                <FormArea>
+                    <StakeForm />
+                </FormArea>
             </InfoCard>
         </InfoArea>
     )

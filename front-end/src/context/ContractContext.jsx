@@ -154,7 +154,6 @@ export const ContractProvider = function({ children }){
             if(!ethereum) return alert("Please install metamask");
             const stakeContract = getStakeContract();
             await stakeContract.claimReward();
-            setEarnedBalance('0')
         } catch (error){
             console.log(error)
             throw new Error("No ethereum object")
@@ -169,7 +168,7 @@ export const ContractProvider = function({ children }){
             getStakedBalance();
             getEarnedBalance();
         }
-    },[currentAccount, rtBalance, stakedBalance, earnedBalance])
+    },[currentAccount, rtBalance])
 
 
     return(

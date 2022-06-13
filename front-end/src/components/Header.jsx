@@ -6,8 +6,7 @@ import { shortenAddress } from "../utils/shorttenAddress";
 
 
 const NavContainer = styled.div`
-  background-color: #375BD2;
-  height: 15%;
+  height: 10%;
   display: flex;
 `;
 
@@ -19,7 +18,7 @@ const ProjectName = styled.div`
   padding-left: 80px;
 
   color: white;
-  font-size: 40px;
+  font-size: 30px;
 `
 
 const LoginSpace = styled.div`
@@ -30,9 +29,10 @@ const LoginSpace = styled.div`
   padding-right: 80px;
 `
 const LoginButton = styled.button`
-  background-color: #white;
+  background-color: #383838;
   border-radius: 10px;
-  font-size: 35px;
+  font-size: 30px;
+  color: white;
   &:hover {
     background-color: grey;
   }
@@ -52,7 +52,7 @@ export function Header(){
           <LoginButton
             onClick={connectWallet}
           >
-            Connect
+            Connect Wallet
           </LoginButton>
         }
         {currentAccount && // if there is a metamask acc display address 
