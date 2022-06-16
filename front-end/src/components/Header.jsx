@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import styled from 'styled-components';
 import { ContractContext } from '../context/ContractContext';
 import { shortenAddress } from "../utils/shorttenAddress";
-
+import { BiWallet } from 'react-icons/bi'
 
 const NavContainer = styled.div`
   height: 10%;
@@ -29,12 +29,21 @@ const LoginSpace = styled.div`
   padding-right: 80px;
 `
 const LoginButton = styled.button`
+  height: 50%;
+  width: 15%;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
   background-color: #383838;
-  border-radius: 10px;
-  font-size: 30px;
+  border-radius: 25px;
+  font-size: 20px;
   color: white;
+
   &:hover {
     background-color: grey;
+    color: black;
   }
 `
 
@@ -52,7 +61,8 @@ export function Header(){
           <LoginButton
             onClick={connectWallet}
           >
-            Connect Wallet
+            <BiWallet />
+            Connect
           </LoginButton>
         }
         {currentAccount && // if there is a metamask acc display address 
