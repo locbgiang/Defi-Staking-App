@@ -8,3 +8,6 @@ deploy:
 local host:
     yarn hardhat node
 
+
+deploy to testnet:
+    yarn hardhat deploy --network goerli

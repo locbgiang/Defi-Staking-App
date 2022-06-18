@@ -35,8 +35,6 @@ const StaticDetails = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-
-    border-bottom: 1px solid silver;
 `
 
 const Item = styled.div`
@@ -52,7 +50,6 @@ const Item = styled.div`
 const StaticDetailName = styled.div`
     color:white;
     width: 90%;
-    padding-left: 5px;
 `
 
 const Balances = styled.div`
@@ -64,8 +61,6 @@ const Balances = styled.div`
     display:flex;
     justify-content: end;
     align-items: center;
-
-    padding-right: 10px;
 
     font-size: 40px;
 `
