@@ -62,7 +62,7 @@ const Balances = styled.div`
     justify-content: end;
     align-items: center;
 
-    font-size: 40px;
+    font-size: 30px;
 `
 
 
